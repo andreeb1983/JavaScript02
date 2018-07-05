@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AddEventListener</title>
+    <style>
+        div { width: 50px; height: 50px; position: relative;}
+        .rose {background: pink; }
+    </style>
+</head>
+<body>
+    <button id="bouton">Déplacer le carré</button>
+    <div class="rose"></div>
+
+    <script>
+        // La méthode addEventListener :
+        // En cliquant sur le bouton, le caré se déplace et change de couleur.
+
+        // Problématique : quand on met plusieurs évènements identiques sur le même bouton, dans la syntaxe vue juqu'ici seul le dernier est pris en compte...
+
+        var carre = document.querySelector('.rose');
+        var bouton = document.querySelector('#bouton');
+        var leftPosition = 0;    // valeur de la position left du carré
+
+        function deplacement() {
+            leftPosition += 10;    // augmente la valeur de la variable de +10
+            carre.style.left = leftPosition + 'px';
+        };
+    
+        function couleur() {
+            carre.style.backgroundColor = "darkblue";  // les propriétés CSS qui comportent un tiret : on leur enlève ce tiret et on met un majuscule
+        }
+
+        //Seul le dernier évènement est pris en compte avec cette méthode:
+        //bouton.onclick = deplacement;   //on écrit la fonction sans sa paire de (), sinon elle est appelée et exécutée immédiatement sans attendre l'ordre du click
+        //bouton.onclick = couleur;   // On constate que le carré devient jaune mais ne se déplace plus car c'est le dernier évènement qui prévaut avec cette syntaxe onclick.
+
+        // Pour s'en sortir on utilise addEventListener :
+        bouton.addEventListener('click', deplacement);
+        bouton.addEventListener('click', couleur);   // L'évènement click s'ecrit sans le "on" et la fontion couleur sans sa paire de () pour ne pas qu'elle s'exécute immédiatemment. La fonstioncouleur est appelé une fonction CALLBACK car elle est passée en argument (= en paramètre) d'une autre fonction, ici dans addEventListener().En effet, elle attend l'ordre de cette dernière pour s'exécuter.
+        
+        //addEventListener( ) veut dire littéralement "'ajouter un écouteur d'évènements". Cela signifie que l'on ajoute un évènement à un élément (ici au bouton).
+
+        // Cette méthode ets utile aussi si vous utilisez des plugings ou des bibliothèques JS qui font appel à des évènements identiques aux vôtres.
+
+
+        //----------------------------------
+        // On peut aussi écrire une fonction anonyme directement dans addEventListener :
+        bouton.addEventListener('click', function(){
+            carre.style.border = '1px solid red';
+        });
+
+
+    
+    </script>
+</body>
+</html>
