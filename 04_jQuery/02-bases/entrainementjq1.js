@@ -78,7 +78,92 @@ $('#mdp1').change(function(){
 });
 
 
+//-----------------------
+// Le mot clé this :
+// this est nécessaire lorsqu'on sélectionne plusieurs éléments simultanément et qu'on a besoin d'en simuler un en particulier :
+$('input').focus(function(){
+    $(this).css({ border :' 2px solid green' });     // this se refère à l'input sur lequel je suis en focus précisément sans sélectionner l'autre
+});
+
+$('input').blur(function(){
+    $(this).css({ border :''});     // avec la méthode css() je remets la bordure à son état initial (correspondant au string vide '') de l'input duquel je viens de sortir (=this)
+});
 
 
+//-----------------------
+// Accéder aux propriété CSS avec css() (complément) :
+var position = $('#violet').css('position');
+
+console.log('La propriété position du div est : ' + position);    // La méthode css() avec seulement une propriété sous forme de string avec une propriété en argument est ungsetter :  elle fournit la valeur de la propriété spécifiée, même si celle-ci n'est pas dans un attribut style (va chercher y compris dans les feuilles de styles)
+
+
+//-----------------------
+// Accéder aux attributs des balises avec attr() :
+if( $('.modifAlt').attr('alt') == '' ) {   // attr() avec un seul argument est un getter: ile permet de récupérer la valeur de l'attribut préciser (ici de alt)
+    $('.modifAlt').attr('alt' , 'paysage');    // attr() avec 2 arguments est un setter : il permet d'attribuer une valeur à un attribut : attr('attribut' , 'valeur').
+}
+
+
+//-----------------------
+// Modifier le contenu d'une balise avec text() ou html() :
+// html() équivaut à innerHTML :
+$('.texte').eq(0).html('<span>Ceci est un texte ajouté avec la méthode html()</span>');    // les balises html sont interprétées et donc insérées dans le code HTML. La méthode eq() permet de cibler l'élément dont l'indice est spécifieé dans les (), ici la première .texte
+
+// text() équivaut à textContent :
+$('.texte').eq(1).text('<span>Ceci est un texte ajouté avec la méthode text()</span>');    // dans la méthode text() tout est considéré comme du texte brut, y compris les éventuelles balises 
+
+// Notes : text() et  html() sans argument sont des getters : ils récupèrent le contenu de la balise sélectionnée.
+
+
+//-----------------------
+// Ajouter ou retirer une classe ( définie dans le CSS) à un élément :
+$('#survol').mouseenter(function(){    //ici ajoute la classe "rouge" (prévu dans le CSS) à l'élément
+    $(this).addClass('rouge');
+})
+
+$('#survol').mouseleave(function(){    // retire la classe "rouge" (prévu dans le CSS) à l'élément
+    $(this).removeClass('rouge');
+})
+
+$('#classBleu').click(function(){    // alterne addClass() et removeClass() sur l'élément #survol (différent du bouton #classBleu : on utilise donc pas $(this) !)
+    $('#survol').toggleClass('bleu');
+})
+
+
+
+//-----------------------
+// Parcourrir les éléments sélectionnés avec une boucle each() :
+$('h4').each(function(indice){    // each() parcour tous les h4 et exécute la fonction pr chacun d'entre eux. Cette fonction possède un paramètre (=indice) qui correspond à l'indice de l'élément sur lequel la boucle se trouve
+    $(this).text('Ce <h4> a pour indice le numéro ' + indice + ' .');    // ajoute le texte au <h4> sur lequel on se trouve précisément à chaque tour de boucle (=$(this))
+
+    // on ajoute la classe "rouge" aux h4 d'indice pair :
+    if ( indice %2 == 0 ) {
+        $(this).addClass('rouge');     //signifie que indice est pair : on ajoute donc la classe "rouge" à chaque élément d'indice pair
+    }
+
+});
+
+
+//-----------------------
+// Les pseudos-sélecteurs à jQuery :first, :last, :visible et :hidden :
+
+// :visible et :hidden :
+$('#afficher').click(function(){
+    $('#galerie img:hidden').css({ opacity : 0.2});    // sélectionne les images cachées et leur met une opacité de 0.2
+    $('#galerie img').show();    // puis on affiche ttes les images (pr voir le résultat)
+});
+
+$('#effacer').click(function(){
+    $('#galerie img').hide();
+});
+
+
+// :first et :last :
+$('#afficher-premier').click(function(){
+    $('#galerie img:first').show();    // électionne la première image et l'affiche. Fonctionne aussi avec :last pour la dernière. Si vous voulez cibler une image au milieu, utiliser la méthode eq().
+
+    // On peut combiner les pseudos-sélecteurs :
+    console.log($('#galerie img:hidden:first').attr('src'));    // on combine :hidden:first pour afficher la source de la 1ere image cachée. Attention à l'ordre, : hidden d'abord puis :first
+});
 
 });    // fin du document ready (à ne pas supprimer)
