@@ -74,7 +74,7 @@ $('#mdp1').change(function(){
     var texte = $('#mdp1').val();      // val() sans argument retourne la valeur saisie dans le champ #mdp1 (getter)
 
     $('#mdp2').val(texte);      // val(argumant) permet de changer la valeur du champ #mdp2 (setter)
-
+    
 });
 
 

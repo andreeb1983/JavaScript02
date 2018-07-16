@@ -30,10 +30,11 @@
     </form>
 
     <script>
+        
         var champEmail = document.getElementById('email');
         var champMdp = document.getElementById('mdp');
 
-        //1- On vérifir tous les champs quand on clique sur "s'inscrire" :
+        //1- On vérifier tous les champs quand on clique sur "s'inscrire" :
         document.querySelector('form').addEventListener('submit', function(event){
             // submit se déclenche quand on soumet un formulaire avec l'input type "submit"
 
@@ -42,7 +43,7 @@
            var erreur = false;   //pour dire qu'il n'y a pas d'erreur au début. On mettera cette variable à true dès qu'une erreur sera produite sur le formulaire
 
            // On vérifie le champ email :
-           if (champEmail.value.indexOf('@') == -1 ) {
+            if (champEmail.value.indexOf('@') == -1 ) {
                 // la propriété value permet d'accéder à la vleur saisie par l'internaute dans l'input champEmail. indexOf('@) retourne la position de l'@ dans cette valeur. Si il n'y est pas, cette méthode retourne -1
                     champEmail.classList.add('red');
                     erreur = true;   // On passe la variable à true pour dire qu'il y a une erreur 
@@ -72,7 +73,7 @@
         });   // fin du submit
 
         // 2- On réinitialise les champs dès qu'ils changent de valeur :
-        champEmail.addEventListener('change', function(){   // l'évènement change se déclaneche quande on modifie la valeur d'un input
+        champEmail.addEventListener('change', function(){   // l'évènement change se déclanche quande on modifie la valeur d'un input
             this.classList.remove('red','green');   // on retire toutes les classes pour mettre une bordure par défaut
         })
 
