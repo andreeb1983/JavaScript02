@@ -1,0 +1,65 @@
+<!--  Exercice
+    1- Vous implémenter un calendrier (datepicker jQuery UI) dans l'input ci-dessus. 
+    2- La date choisie est affichée au format dd-mm-yy dans l'input.
+    3- Quand on change de date, on affiche la date sélectionnée dans un alert.
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery UI - datepicker</title>
+    <!-- pour lier le CSS par défaut de jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script 
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+    <script
+    src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+    crossorigin="anonymous"></script>  
+    
+    <!--  lien vers le fichier js de régionalisation du datepicker : -->
+    <script src="datepicker-fr.js"></script>
+    <!--  pour régionaliser: aller dans API Documentation du date picker au paragraphe localization. Il indique un éditeur du fichier à télécharger: cliquer sur la version voulue, puis choisir "row" puis clic droit et enregistrer sous... le fichier -->
+
+</head>
+<body>
+
+    <div>
+        <label>Choississez une date :</label>
+
+        <input type="text" id="myInput">
+
+    </div>
+
+
+    <script>
+        $( function() {
+
+            $( "#myInput" ).datepicker({
+                dateFormat: "dd-mm-yy"
+            }); 
+            
+            // var change = $('#myInput');
+
+            // change.change(function(){
+            //     alert('Votre réservation est prévue pour le : ' + $ (this).val());
+            // });  
+            $('#myInput').change(function(){
+                alert('Votre réservation est prévue pour le : ' + $(myInput).val());
+            });
+        });           
+
+        
+
+
+    </script>
+
+    
+</body>
+</html>

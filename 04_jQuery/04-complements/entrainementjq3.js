@@ -43,4 +43,55 @@ $(function(){
     });   
 
 
+    //-----------------------------
+    // Convertir un élément du DOm en élément jQuéry :
+    // Utile si l'on veut utiliser des méthodes de jQuery sur les éléments du DOM.
+
+    var elementDOM = document.getElementsByClassName('galerie')[0];   // on sélectionne en JS un élément du DOM, ici le premier div.galerie
+    console.log(elementDOM);
+
+
+    // Puis je le tranforme en un objet jQuery :
+    var objetJquery = $(elementDOM);   // on utilise la fonction principale jQuery alias $, pour transformes un élément du DOM en élément jQuery : vous pouvez donc lui appliquer n'importe quelle méthode spécifique à jQuery (fedeIn, animate,...)
+    console.log(objetJquery);
+
+    objetJquery.click(function(){
+        alert('Ce <div> est un objet jQuery sur lequel on applique une syntaxe propre à jQuery.');
+    });
+
+    // Convertir un objet jQuery en un élément du DOM :
+    var autreObjetJquery = $('.galerie');   // on sélectionne toutes les classes .galerie
+
+    // Puis je transforme cet objet jQuery en un élé ment du DOM :
+    var autreElementDOM = autreObjetJquery.get();  // get tranforme un objet jQuery en un array contenant tous les éléments du DOM
+    console.log(autreElementDOM);     // on voit cet array
+
+    autreElementDOM[1].addEventListener('click',function(){     // dans l'array, on cible un élément en mettant un indice entre crochets
+        alert('Ce <div> est devenu un élément du DOM sur lequel on applique une syntaxe propre à JS.');
+    });
+
+    // 
+    autreElementDOM = $('.galerie')[1];  // en utilisant la notation entre crochets, nous avons transformé l'objet jQuery en un objet du DOM classique. Attention : on ne peut donc plus lui appliquer des méthodes jQuery, mais uniquement du JavaScript ! Pour cibler l'indice 1 en jQuery, nous aurions utilisé eq(1) à la place de [1].
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });    // fin du doc ready
